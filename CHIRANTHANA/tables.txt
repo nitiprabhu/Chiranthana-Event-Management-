@@ -1,0 +1,32 @@
+create table event(
+eno varchar(10) primary key,
+ename varchar(20),
+max_par integer);
+
+
+create table category(
+cid integer primary key,
+descrip varchar(20));
+
+create table school(
+sid varchar(10) primary key,
+sname varchar(40),
+slocation varchar(20),
+cid integer,
+foreign key(cid) references category(cid) on delete cascade);
+
+create table student(
+st_no varchar(10) primary key,
+st_name varchar(20),
+class varchar(20),
+sid varchar(10),
+foreign key(sid) references school(sid) on delete cascade);
+
+create table participents(
+st_no varchar(10),
+eno varchar(10),
+winners integer,
+primary key(st_no,eno),
+foreign key(st_no) references student(st_no) on delete cascade,
+foreign key(eno) references event(eno)on delete cascade);
+
